@@ -1,0 +1,23 @@
+# cluster_timepoint_cell_counts.tsv — analyzed (post-doublet-removal) cell counts per Seurat cluster x timepoint.
+# Rows = clusters 0-17 (+Total); columns = timepoints (+Total). Total analyzed cells = 49,568 (51,726 pre-doublet-removal; see Supp Fig S1 / doubletfinder counts).
+# Source: data/doubletfinder/per_cluster_timepoint_doublet_rates.tsv (valid column).
+cluster	preCx	wk2	wk4	wk8	wk12	wk16	wk20R	wk22R	Total
+0	12	123	281	690	9491	359	8	12	10976
+1	0	0	0	0	0	0	81	9295	9376
+2	18	2807	2456	227	57	59	8	0	5632
+3	0	0	0	0	0	0	107	4376	4483
+4	67	845	369	77	278	2194	34	27	3891
+5	0	1133	1471	5	14	16	16	0	2655
+6	188	84	22	36	1315	790	2	5	2442
+7	0	0	0	0	0	0	32	2550	2582
+8	33	486	355	51	595	115	4	2	1641
+9	0	0	0	0	0	0	117	1444	1561
+10	0	0	1	3	100	132	768	66	1070
+11	1020	0	0	0	0	4	1	0	1025
+12	8	212	22	12	462	52	2	0	770
+13	0	0	0	0	0	0	73	554	627
+14	0	0	0	0	0	1	23	290	314
+15	255	0	0	0	0	0	0	0	255
+16	0	0	0	0	142	0	0	0	142
+17	0	0	0	1	66	54	3	2	126
+Total	1601	5690	4977	1102	12520	3776	1279	18623	49568

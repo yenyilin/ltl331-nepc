@@ -1,0 +1,52 @@
+# template.layout — recommended defaults for scripts/assemble_figure.py
+# Copy this to fig<N>.layout, edit the mosaic + panel map, then run:
+#   python scripts/assemble_figure.py --layout-file scripts/figure_layouts/fig<N>.layout
+# Each setting below has a one-line rationale; tweak per figure.
+
+# ---- canvas width -----------------------------------------------------------
+# Generic standard PDF (Letter/A4, normal margins): 160-165 mm fills the text column.
+# Targeting a journal instead? use a preset: single (90) | 1.5col (140) | double (180).
+@width: 165
+
+# ---- height ------------------------------------------------------------------
+# Leave @height unset -> rows auto-size to panel aspect ratios (minimal letterboxing).
+# max-height caps it to one printable page (Letter text height ~229 mm, A4 ~247).
+@max-height: 230
+
+# ---- spacing -----------------------------------------------------------------
+@trim: true      # crop each panel to its ink bbox; removes savefig margins, stays vector — biggest win
+@gap: 6          # mm between panels; needs headroom for labels lifted above lower-row panels
+@margin: 5       # mm outer border; leaves room above the top row for the lifted label
+
+# ---- panel labels (A, B, C…) -------------------------------------------------
+# Label baseline = cell.y0 + label-size + dy. To sit ABOVE the panel (not on the data),
+# dy must be more negative than label-size, e.g. -13 for size 11 -> baseline ~2 pt above
+# the panel top. This is what stops the letter overlapping a full-bleed panel like D.
+@label-size: 11          # ~10-12 pt bold is standard for print
+@label-font: hebo        # Helvetica-Bold (fitz base-14)
+@label-offset: -2, -13   # lift into the gutter above-left of the panel; clears the plotted data
+# @lowercase: true       # uncomment for a/b/c instead of A/B/C
+# @no-labels: true       # uncomment if THIS figure is itself a panel for a bigger assembly
+
+# ---- alignment ---------------------------------------------------------------
+@align: center           # where a panel sits inside a larger cell (center | topleft | top | left)
+
+# ---- output ------------------------------------------------------------------
+@out: figures/FigN.pdf
+@png: 300                # raster proof DPI; 300 for drafts, 600 for final visual checks
+
+# ---- mosaic (edit me) --------------------------------------------------------
+# Each distinct letter = one panel; its cells must form a rectangle. '.' = empty cell.
+#   ABC / DEF          six equal panels, 3x2
+#   AAABBB / CCDDEE    A,B half-width top; C,D,E third-width below (6-col = LCM of 2,3)
+#   AABBCC / .DDEE.    3 across top, 2 centered below
+ABC
+DEF
+
+# ---- panel map: label -> label-free source PDF (use path:page for multipage) --
+A = figures/panelA.pdf
+B = figures/panelB.pdf
+C = figures/panelC.pdf
+D = figures/panelD.pdf
+E = figures/panelE.pdf
+F = figures/panelF.pdf

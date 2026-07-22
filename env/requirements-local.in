@@ -1,0 +1,44 @@
+# LTL331 NEPC — Intel-Mac LOCAL exploration env (CPU-only)
+# Slimmer than requirements.in for fast install on a laptop.
+#
+# Hardware target: Intel x86_64 macOS, no NVIDIA / no MPS / AMD not ML-usable.
+# Everything below installs cleanly via uv/pip on this platform.
+# Use with:
+#   uv venv .venv --python 3.11
+#   source .venv/bin/activate
+#   uv pip install -r env/requirements-local.in
+#   uv pip freeze > env/requirements-local.txt    # capture the actual resolved versions
+
+# --- core ---
+numpy
+scipy
+pandas
+scikit-learn
+matplotlib
+seaborn
+statsmodels
+anndata
+scanpy
+pyyaml
+
+# --- trajectory ---
+scvelo                     # dynamical recover_dynamics is slow on CPU (~30-60 min on 51k cells)
+cellrank>=2.0
+
+# --- notebooks ---
+marimo
+
+# --- optimal-transport / RealTimeKernel (uses JAX; CPU only on Intel Mac) ---
+# Uncomment when you want to run the moscot RealTimeKernel locally.
+# JAX x86-macOS wheels are still published but on a deprecation track;
+# pin the resolved versions in requirements-local.txt for reproducibility.
+# moscot[scrnaseq]
+
+# --- patient-level stats Stack C accelerators (Intel-Mac safe; no torch) ---
+# Add these to upgrade patient_level_stats.py beyond the self-contained fallbacks.
+# celltypist
+# decoupler
+# scib
+
+# --- intentionally NOT installed locally ---
+# pertpy / scvi-tools / pyscenic — pull in PyTorch / heavy deps; run on the server.

@@ -1,0 +1,25 @@
+# Supplementary Table T5. Per-cluster doublet-removal summary with Fisher enrichment test (R1#1).
+# DoubletFinder per sample; total 51,726 -> 49,568 analyzed cells (overall doublet rate 4.17%).
+# Counts are barcode-harmonized across the pre/post objects (data/doubletfinder/unified/), so
+# doublets = original_n_cells - valid_n_cells is always >= 0. fisher_odds_ratio/p: enrichment of
+# doublets in the cluster vs the rest (two-sided Fisher exact); fisher_bh_q = Benjamini-Hochberg.
+# Cluster 17 is depleted (OR 0.36), not enriched.
+cluster	original_n_cells	valid_n_cells	doublets	doublet_pct	fisher_odds_ratio	fisher_p	fisher_bh_q	enriched_BHq_lt_0.05	manuscript_role
+0	11289	10976	313	2.77	0.596	1.88e-18	5.64e-18	False	persistence (AR-target-collapsed)
+1	9427	9376	51	0.54	0.104	4.77e-122	8.58e-121	False	ASCL1- NEPC bulk (dominant)
+2	5840	5632	208	3.56	0.832	0.0124	0.0139	False	early castration response
+3	5013	4483	530	10.57	3.274	2.43e-94	2.19e-93	True	NEPC engine (cycling)
+4	4025	3891	134	3.33	0.777	0.0046	0.00592	False	pre-EMT hub / bridge feeder
+5	2808	2655	153	5.45	1.348	0.000796	0.00119	True	wk2-4 PSMA+ variant
+6	2634	2442	192	7.29	1.885	5.45e-14	1.23e-13	True	Pop1 Epithelial-hybrid persister
+7	2588	2582	6	0.23	0.051	4.77e-40	2.15e-39	False	NE-marker-low NEPC variant (DNPC-like)
+8	1866	1641	225	12.06	3.4	5.07e-47	3.04e-46	True	regression engine (cycling)
+9	1757	1561	196	11.16	3.072	3.79e-36	1.36e-35	True	stable committed NEPC core (cycling)
+10	1136	1070	66	5.81	1.43	0.0084	0.0101	True	ASCL1+ NEPC progenitor (sub-mature wk12-16; mature wk20R+)
+11	1050	1025	25	2.38	0.555	0.00226	0.00313	False	preCx AR+ luminal root
+12	770	770	0	0.0	0.0	9.13e-15	2.35e-14	False	rare AR-retained transitional outlier
+13	681	627	54	7.93	2.003	1.07e-05	1.92e-05	True	NE entry hub
+14	314	314	0	0.0	0.0	2.81e-06	5.61e-06	False	transitional NEPC
+15	255	255	0	0.0	0.0	4.69e-05	7.68e-05	False	preCx PROM1+ cycling
+16	145	142	3	2.07	0.485	0.294	0.294	False	AR-hyperelevated NEW candidate
+17	128	126	2	1.56	0.364	0.182	0.192	False	EMT bridge bottleneck (R1#1 anti-doublet focus)

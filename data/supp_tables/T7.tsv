@@ -1,0 +1,5 @@
+# Supplementary Table T7. Enrichment of neuroendocrine (NE) epithelium among NED-annotated patients, per cohort (R1#3).
+# 2x2 cell counts (NE vs non-NE) x (NED vs non-NED); two-sided Fisher exact. 95% CIs are reported in main Fig. 6D.
+dataset	NE_in_NED	NE_in_nonNED	nonNE_in_NED	nonNE_in_nonNED	odds_ratio	fisher_p_twosided
+Gao	1340	6	6775	4082	134.56	2.654e-242
+Li	4020	54	4173	1758	31.36	0.0

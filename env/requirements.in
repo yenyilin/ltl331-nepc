@@ -1,0 +1,39 @@
+# LTL331 NEPC — Python analysis environment (canonical / server / paper run)
+# This is the wishlist; lock it to exact versions with:
+#   uv pip compile env/requirements.in -o env/requirements.txt
+# Then install with:
+#   uv pip install -r env/requirements.txt
+# Commit both files for reproducibility.
+
+# --- core scientific stack ---
+numpy
+scipy
+pandas
+scikit-learn
+matplotlib
+seaborn
+statsmodels
+
+# --- single-cell ---
+anndata
+scanpy
+scvelo
+cellrank>=2.0
+celltypist                 # label transfer (patient_level_stats Step 1)
+decoupler                  # signature scoring (Step 4 acceleration)
+scib                       # iLISI/cLISI/kBET (Step 5 acceleration)
+
+# --- optimal-transport / temporal kernel ---
+# RealTimeKernel via moscot; uses JAX (CPU-only on Intel Mac)
+moscot[scrnaseq]
+
+# --- regulons / SCENIC ---
+# Heavy; usually only on the server. Uncomment when locking the server env.
+# pyscenic
+
+# --- doublets ---
+# scrublet                # Tier-0c if doublet column not already in obs
+
+# --- config + notebooks ---
+pyyaml                     # config/params.yaml reader (R + Python share this)
+marimo                     # reviewer-facing notebooks (notebooks/*.py)

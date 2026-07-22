@@ -1,0 +1,15 @@
+# Biological row order + display labels for the Nexus CNV panels (S2).
+# Order: patient origin -> serial PDX generations (3,5,7) -> the scRNA generation;
+# within each generation, castration progression (pre-CX adeno -> post-CX weeks -> relapse/NEPC).
+sample	display_name	order
+927	Patient (927)	1
+LTL331-3	Gen3 · pre-CX (adeno)	2
+LTL331-3-R	Gen3 · relapse (NEPC)	3
+LTL331-5_8wk	Gen5 · 8 wk	4
+LTL331-5_12wk	Gen5 · 12 wk	5
+LTL331-7	Gen7 · pre-CX (adeno)	6
+LTL331-7-R	Gen7 · relapse (NEPC)	7
+LTL331_preCX1	Gen11 · pre-CX (adeno)	8
+LTL331_16wk1	Gen11 · 16 wk	9
+LTL331_20wk	Gen11 · 20 wk	10
+LTL331_22wk2	Gen11 · 22 wk	11

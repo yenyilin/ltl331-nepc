@@ -1,0 +1,67 @@
+cff-version: 1.2.0
+message: "If you use this code or the derived data, please cite the preprint in preferred-citation below."
+title: "LTL331-NEPC scRNA-seq analysis code"
+abstract: >-
+  Analysis code for a longitudinal single-cell RNA-seq study of neuroendocrine
+  transdifferentiation in the LTL331/R patient-derived xenograft (51,726 cells,
+  8 timepoints, pre-castration to NEPC), covering WES/CNV, trajectory, RNA velocity,
+  fate mapping, regulon, and clinical cross-cohort analyses.
+type: software
+repository-code: "https://github.com/yenyilin/ltl331-nepc"
+license: MIT
+authors: &byline
+  - family-names: Sar
+    given-names: Funda
+  - family-names: Chung
+    given-names: Hee Chul
+  - family-names: Lin
+    given-names: Yen-Yi
+  - family-names: Lin
+    given-names: Dong
+  - family-names: Morova
+    given-names: Tunc
+  - family-names: Haegert
+    given-names: Anne
+  - family-names: Volik
+    given-names: Stanislav
+  - family-names: Bell
+    given-names: Robert
+  - family-names: LeBihan
+    given-names: Stephane
+  - family-names: Ozturan
+    given-names: Dogancan
+  - family-names: Xie
+    given-names: Hui
+  - family-names: Dong
+    given-names: Xin
+  - family-names: Wu
+    given-names: Rebecca
+  - family-names: Li
+    given-names: Jing
+  - family-names: Kung
+    given-names: Hsing-Jien
+  - family-names: Gleave
+    given-names: Martin E.
+  - family-names: Lack
+    given-names: Nathan A.
+  - family-names: Wang
+    given-names: Yuzhuo
+  - family-names: Collins
+    given-names: Colin C.
+    affiliation: "Vancouver Prostate Centre, Department of Urologic Sciences, University of British Columbia"
+    # corresponding author
+preferred-citation:
+  type: article
+  title: >-
+    Longitudinal single-cell RNA sequencing of a neuroendocrine transdifferentiation
+    model reveals transcriptional reprogramming in treatment-induced neuroendocrine
+    prostate cancer
+  authors: *byline
+  journal: "bioRxiv"
+  publisher:
+    name: "Cold Spring Harbor Laboratory"
+  year: 2025
+  month: 4
+  doi: "10.1101/2025.04.25.650369"
+  url: "https://doi.org/10.1101/2025.04.25.650369"
+  # TODO on acceptance: switch type/journal/year/doi to the published Genome Medicine article.

@@ -1,0 +1,134 @@
+# Single source of truth for all analysis parameters (Reviewer 2 minor #3).
+# The human-readable docs/methods_parameter_table.md is derived from this.
+# Values pre-filled from the manuscript Methods; <TBD> = confirm from run config.
+
+versions:
+  cellranger: "6.0.0"
+  cellranger_velocity: "7.1.0"
+  seurat: "4.1.1"            # Gao/Li processing used 4.3.0
+  ucell: "2.6.2"
+  infercnv: "1.15.0"
+  msigdbr: "7.5.1"
+  fgsea: "1.30.0"
+  velocyto: "0.17.17"
+  scvelo: "0.3.4"
+  cellrank: "2.0.7"
+  pyscenic: "0.12.0"
+  cnmf: "1.4.1"
+  harmony: "1.1.0"
+  sva: "3.50.0"
+  R: "4.2.1"
+  python: "3.11.9"
+
+qc:
+  human_read_frac_min: 0.80   # PDX species filter
+  mito_pct_max: 25
+  mad_threshold: 3
+  min_umi: 1000
+  min_cells_per_gene: 10
+
+clustering:
+  n_pcs: 50
+  n_clusters: 18
+  seed: 0                     # <TBD> confirm from the original Seurat FindClusters/RunUMAP run
+
+seeds:                        # analysis RNG seeds (from scripts/; convention = 0 unless noted)
+  global: 0                   # <TBD> confirm original Seurat/leiden run; revision scripts use 0
+  leiden: 0                   # leiden clustering RNG
+  default_analysis: 0         # --seed default across most revision scripts
+  infercnv_subsample: 42      # infercnv_clonal_check.py per-cluster subsample
+  cellrank_bifurcation: [0, 1, 2]   # cellrank_bifurcation.py multi-seed robustness
+  umap_random_state: 0        # revision reintegration sc.tl.umap/pca; original RunUMAP seed.use <TBD>
+  figure_subsample: 0         # numpy default_rng(0) for plot background-cell subsampling
+  # pySCENIC: nondeterministic by design -> 20-run consensus (TFs kept if seen >=16x), no single seed
+
+infercnv:
+  reference: "d17 normal adult prostate 3, luminal epithelial"
+  subsample_per_group: 2000
+  cutoff: 0.1
+  hclust_method: "ward.D2"
+  noise_filter: 0.01
+  leiden_resolution: 0.001
+  hmm: true
+  hmm_type: "i6"
+
+trajectory:
+  velocity_graph_n_neighbors: 8     # shared by scVelo moments and PAGA
+  velocity_graph_n_pcs: 20          # distinct from clustering n_pcs (50)
+  paga_edge_weight_threshold: 0.3
+  scvelo_n_top_genes: 2000
+  scvelo_min_counts: 20             # min_shared_counts
+  scvelo_mode: "dynamical"          # revision (CellRank2); original used stream/defaults
+  tf_annotation: "cisTarget TF list (Aug 2022)"
+
+cellrank:
+  estimator: "GPCCA"
+  kernel: "0.8*velocity + 0.2*connectivity"   # revision
+  n_states_original: [1, 18]
+  terminal_original: ["cluster7"]
+  terminal_revision: ["ASCL1pos_cluster10", "ASCL1neg_cluster7"]
+  n_macrostates_revision: 8             # GPCCA compute n_states (confirmed: obs['macrostates_fwd'].nunique()=8)
+  terminal_states_revision: 8           # all 8 macrostates terminal {0,1,4_1,4_2,6,7,9,10}; 4 are NE fates (clusters 1,7,9,10)
+
+scenic:
+  subsample_cells: 7878
+  max_cells_per_cluster: 500
+  iterations: 20
+  tf_min_recurrence: 16
+  target_min_frac: 0.80
+  n_active_regulons: 200
+  n_visualized_regulons: 63
+  motif_db: "Motif2TF V9"     # cisTarget motif-to-TF annotations, version 9 (motifs-v9-nr)
+
+cnmf:
+  k_range: [5, 20]
+  iterations: 20
+  n_hvgs: 2000
+  density_threshold: 0.03
+  n_geps: 7
+  n_top_genes_per_gep: 100
+
+public_integration:
+  within_cohort_method: "harmony"
+  signature_top_deg: 20
+  deg_log2fc_min: 0.5
+  deg_fdr_max: 0.05
+
+joint_integration_revision:
+  method: "harmony"
+  gene_set: "human one-to-one orthologs"
+  resolution: 0.55
+  n_clusters: 27
+  harmony_theta: TBD
+  harmony_max_iter: TBD
+  seed_leiden: 0
+
+bulk_rnaseq:
+  cohort: "316 CRPC + 19 NEPC (E-MTAB-9930)"
+  batch_correction: "ComBat (sva), PolyA+ reference"
+  gep_top_genes: 30
+
+# Canonical AnnData inputs. Three objects, three schemas — see
+# data/objects/MANIFEST.md for the full contract. Scripts take --h5ad explicitly;
+# these logical paths/keys are the documented defaults (and the handles a future
+# Snakemake/Nextflow workflow resolves).
+data_objects:
+  base:                                   # (1) expression — Fig 2/3, SCENIC, decoupleR
+    file: data/objects/ltl331_annotated.h5ad
+    n_cells: 51726
+    matrix: { X: scaled_zscore_hvg, lognorm: raw, layers: none }
+    score_from: raw                       # .X is scaled — use_raw=True / --use-raw
+    obs: { cluster: seurat_clusters, timepoint_num: week_num, timepoint_label: timepoint }
+  velocity_cr2:                           # (2) trajectory/fate — Fig 4
+    file: data/objects/ltl331_velocity.h5ad
+    matrix: { layers: [spliced, unspliced, velocity, Ms, Mu] }
+    obs: { cluster: seurat_clusters, pseudotime: velocity_pseudotime,
+           macrostates: macrostates_fwd, terminals: term_states_fwd }
+    # per-cell fate probabilities are per-terminal (recomputed by cluster17_absorption.py,
+    # compute_fate_probabilities): ASCL1+ fate = terminal "10"; ASCL1- fate = terminals "1"+"7"+"9"
+  harmony:                                # (3) integration/clinical — Fig 6, R1#3
+    file: data/objects/ltl331_harmony_integrated.h5ad
+    embedding: X_pca_harmony
+    matrix: { X: TBD_check_min }          # if scaled, patient_level_stats needs --layer
+    obs: { cohort: TBD, patient: TBD, joint_cluster: leiden_0.55,
+           ltl331_label: seurat_clusters }

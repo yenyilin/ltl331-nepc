@@ -1,0 +1,29 @@
+# Data — hosted on figshare / GEO, never in the repo
+*.h5ad
+*.rds
+*.h5
+*.loom
+*.mtx
+*.mtx.gz
+data/raw/
+data/processed/
+data/external/
+
+# Results / intermediates (regenerated)
+results/
+figures/**/*.svg
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.egg-info/
+.venv/
+
+# HPC / logs
+logs/
+slurm-*.out
+
+# Editor / OS
+*.ai
+.DS_Store

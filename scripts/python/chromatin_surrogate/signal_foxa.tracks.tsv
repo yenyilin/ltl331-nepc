@@ -1,0 +1,10 @@
+# Track manifest for signal_only_foxa.sh — EDIT to point at the bigWigs you downloaded.
+# Columns: path <TAB> label <TAB> build   (build = hg19 | hg38; hg19 is lifted to hg38)
+# Pick the NEPC-relevant FOXA/ASCL1 tracks Shrestha cannot supply (FOXA2, direct ASCL1 binding).
+# label shows on the figure; keep it short (factor:model).
+#path	label	build
+/path/to/GSE161948/ASCL1_NEPC.bw	ASCL1:Baca-NEPC	hg19
+/path/to/GSE161948/FOXA1_NEPC.bw	FOXA1:Baca-NEPC	hg19
+/path/to/GSE281784/FOXA2_H660.bw	FOXA2:Form-H660	hg38
+/path/to/GSE281784/FOXA2_LuCaP145.bw	FOXA2:Form-PDX145	hg38
+/path/to/GSE232555/FOXA2_H660.bw	FOXA2:Wang-H660	hg19

@@ -1,0 +1,46 @@
+[project]
+name = "ltl331-nepc"
+version = "0.1.0"
+description = "Longitudinal scRNA-seq analysis of the LTL331 PDX model (adenocarcinoma -> NEPC)."
+requires-python = ">=3.11,<3.12"
+
+# Direct (top-level imported) dependencies, pinned to the exact versions run on the
+# cluster 'cellrank' conda env (source: scripts/conda-frozen.txt).
+# uv resolves the rest of the tree into uv.lock. Transitive versions can differ slightly
+# from conda because a few pins are PyPI-inconsistent (e.g. pygam 0.9.1 declares scipy<1.12
+# vs the env's scipy 1.13.0) or are conda-only builds not on PyPI (pyro-ppl git build,
+# torch .post100, petsc4py/slepc4py/mpi4py system-lib packages) — those cannot be reproduced via PyPI.
+# moscot is intentionally excluded: it was never run for this analysis (the CellRank
+# RealTimeKernel path in cellrank_bifurcation.py is optional and unused; the main results
+# use the Connectivity/Pseudotime/Velocity kernels). Excluding it also drops the JAX stack.
+dependencies = [
+    "anndata==0.10.7",
+    "scanpy==1.10.1",
+    "scvelo==0.3.4",
+    "cellrank==2.0.7",
+    "decoupler==2.1.6",
+    "scikit-learn==1.1.3",
+    "statsmodels==0.14.1",
+    "numpy==1.26.4",
+    "pandas==2.2.2",
+    "scipy==1.13.0",
+    "matplotlib==3.8.4",
+    "seaborn==0.13.2",
+    "adjustText==1.3.0",
+    "openpyxl==3.1.2",
+    "pillow==10.3.0",
+    "pyyaml==6.0.1",
+    "leidenalg==0.10.2",
+    "igraph==0.11.5",
+    "umap-learn==0.5.5",
+    # Pin the numba/llvmlite/pynndescent trio to the cluster versions. Left to float,
+    # uv pulls llvmlite 0.48 / numba 0.66, whose wheels are missing on some platforms
+    # and fall back to a from-source LLVM build that fails. These pins match the paper
+    # env and land on releases with broad prebuilt-wheel coverage (linux + macOS arm64/x86).
+    "numba==0.59.1",
+    "pynndescent==0.5.12",
+]
+
+[tool.uv]
+# resolve only for the platforms actually used (linux + macOS), not Windows
+environments = ["sys_platform == 'linux'", "sys_platform == 'darwin'"]

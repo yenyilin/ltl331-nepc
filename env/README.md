@@ -1,4 +1,28 @@
-# Environment capture
+# Environment
+
+## Recommended: `uv sync` (portable, linux + macOS)
+
+The repo ships a `pyproject.toml` + `uv.lock` at its root. From the repo root:
+
+```
+uv sync
+source .venv/bin/activate
+```
+
+This resolves a consistent, cross-platform environment (Python 3.11, linux + macOS
+including Apple Silicon) and is the path we test. It is a faithful **re-derivation**
+from PyPI of the analysis stack, not a byte-for-byte mirror of the original conda
+environment: a few transitive versions differ where a conda pin is PyPI-inconsistent
+(e.g. `pygam`), and `moscot`/JAX are omitted because the optional CellRank
+RealTimeKernel was never used for this analysis. All figure and analysis scripts run
+under this environment.
+
+The `env/requirements*.txt` files below are a legacy pip fallback derived from the
+conda freeze; prefer `uv sync`.
+
+---
+
+# Environment capture (provenance)
 
 **Capture exact versions from the machine that produced the results** — do not
 hand-transcribe (Reviewer 2 minor #3 asks for versions).

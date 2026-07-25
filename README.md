@@ -28,13 +28,13 @@ cross-dataset analyses. Code for *Genome Medicine* (under revision).
 
 1. **Environment** (uv, Python 3.11) — from the project root:
    ```
-   uv venv .venv --python 3.11
+   uv sync
    source .venv/bin/activate
-   uv pip compile env/requirements.in -o env/requirements.txt   # if requirements.txt absent
-   uv pip install -r env/requirements.txt                        # locked versions
    ```
-   `env/README.md` documents the canonical vs. slimmer local-exploration env and
-   how versions were captured.
+   `uv sync` reads the committed `pyproject.toml` + `uv.lock` and builds a
+   consistent, cross-platform environment (linux + macOS, including Apple Silicon).
+   `env/README.md` documents this environment and a legacy pip fallback
+   (`env/requirements.txt`).
 2. **Data** — see `DATA_AVAILABILITY.md` (figshare DOIs for processed objects; GEO
    GSE297328 + reviewer token for raw data).
 3. **Parameters** — all thresholds/seeds/versions live in `config/params.yaml`
@@ -53,7 +53,8 @@ cross-dataset analyses. Code for *Genome Medicine* (under revision).
 scripts/python              analyses (see FIGURES.md for figure mapping)
 config/params.yaml          all parameters
 docs/                       methods parameter table
-env/                        exact tool versions (uv / pip-tools; requirements.in → .txt)
+pyproject.toml, uv.lock     pinned environment (`uv sync`)
+env/                        environment notes + legacy pip fallback
 data/README.md             data sources (files hosted on figshare/GEO)
 review/                     revision planning + response material
 ```

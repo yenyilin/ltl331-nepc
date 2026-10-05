@@ -1,5 +1,7 @@
 # LTL331 NEPC scRNA-seq
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23159059.svg)](https://doi.org/10.5281/zenodo.23159059)
+
 <p align="center">
   <img src="figures/cl17_gateway_abstract.png" width="850"
        alt="Graphical abstract: cluster 17 is the single, transient gateway of PRAD-to-NEPC transdifferentiation, feeding a strongly biased ASCL1−/ASCL1+ bifurcation.">

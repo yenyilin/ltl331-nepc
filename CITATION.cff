@@ -1,5 +1,7 @@
 cff-version: 1.2.0
-message: "If you use this code or the derived data, please cite the preprint in preferred-citation below."
+message: "If you use this code or the derived data, please cite the article in preferred-citation below."
+version: 1.0.0
+date-released: 2026-10-05
 title: "LTL331-NEPC scRNA-seq analysis code"
 abstract: >-
   Analysis code for a longitudinal single-cell RNA-seq study of neuroendocrine
@@ -12,42 +14,59 @@ license: MIT
 authors: &byline
   - family-names: Sar
     given-names: Funda
+    orcid: "https://orcid.org/0000-0002-4498-211X"
   - family-names: Chung
     given-names: Hee Chul
+    orcid: "https://orcid.org/0000-0002-3547-4711"
   - family-names: Lin
     given-names: Yen-Yi
+    orcid: "https://orcid.org/0000-0002-4379-1231"
   - family-names: Lin
     given-names: Dong
+    orcid: "https://orcid.org/0000-0002-0303-2599"
   - family-names: Morova
     given-names: Tunc
+    orcid: "https://orcid.org/0000-0002-4062-6185"
   - family-names: Haegert
     given-names: Anne
+    orcid: "https://orcid.org/0000-0002-0738-2270"
   - family-names: Volik
     given-names: Stanislav
+    orcid: "https://orcid.org/0000-0001-8379-8887"
   - family-names: Bell
     given-names: Robert
+    orcid: "https://orcid.org/0000-0002-2456-0972"
   - family-names: LeBihan
     given-names: Stephane
+    orcid: "https://orcid.org/0000-0003-0648-8695"
   - family-names: Ozturan
     given-names: Dogancan
-  - family-names: Xie
+    orcid: "https://orcid.org/0000-0003-0562-8537"
+  - family-names: Xue
     given-names: Hui
   - family-names: Dong
     given-names: Xin
   - family-names: Wu
     given-names: Rebecca
+    orcid: "https://orcid.org/0009-0006-1032-6882"
   - family-names: Li
     given-names: Jing
+    orcid: "https://orcid.org/0000-0002-7973-3930"
   - family-names: Kung
     given-names: Hsing-Jien
+    orcid: "https://orcid.org/0000-0002-9903-5830"
   - family-names: Gleave
     given-names: Martin E.
+    orcid: "https://orcid.org/0000-0003-4235-0167"
   - family-names: Lack
     given-names: Nathan A.
+    orcid: "https://orcid.org/0000-0001-7399-5844"
   - family-names: Wang
     given-names: Yuzhuo
+    orcid: "https://orcid.org/0000-0002-9749-8591"
   - family-names: Collins
     given-names: Colin C.
+    orcid: "https://orcid.org/0000-0001-6148-6110"
     affiliation: "Vancouver Prostate Centre, Department of Urologic Sciences, University of British Columbia"
     # corresponding author
 preferred-citation:
@@ -57,11 +76,18 @@ preferred-citation:
     model reveals transcriptional reprogramming in treatment-induced neuroendocrine
     prostate cancer
   authors: *byline
-  journal: "bioRxiv"
-  publisher:
-    name: "Cold Spring Harbor Laboratory"
-  year: 2025
-  month: 4
-  doi: "10.1101/2025.04.25.650369"
-  url: "https://doi.org/10.1101/2025.04.25.650369"
-  # TODO on acceptance: switch type/journal/year/doi to the published Genome Medicine article.
+  journal: "Genome Medicine"
+  status: in-press
+  year: 2026
+references:
+  - type: article
+    title: >-
+      Longitudinal single-cell RNA sequencing of a neuroendocrine transdifferentiation
+      model reveals transcriptional reprogramming in treatment-induced neuroendocrine
+      prostate cancer
+    authors: *byline
+    journal: "bioRxiv"
+    status: preprint
+    year: 2025
+    month: 4
+    doi: "10.1101/2025.04.25.650369"

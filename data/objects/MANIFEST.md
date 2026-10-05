@@ -2,7 +2,7 @@
 
 The analysis runs off **three** AnnData objects. Each has a *different internal
 schema*; scripts must read the right matrix and keys per object. This manifest is
-the contract. (Objects are gitignored and hosted on figshare — see
+the contract. (Objects are gitignored and hosted on GEO (GSE297328) — see
 `../../DATA_AVAILABILITY.md`. Logical paths and key names are mirrored in
 `config/params.yaml › data_objects`.)
 
@@ -72,3 +72,16 @@ cross-cohort correspondence, clinical co-mapping (Fig 6), patient-level stats.
 > if negative, supply `--layer <lognorm-layer>`.
 
 ---
+
+## Integrity
+
+Record checksums + provenance when depositing (so a fetched object is verifiably
+the one the figures were made from):
+
+| object | GEO file | 
+|--------|--------------|
+| ltl331_annotated.h5ad | GSE297328_ltl331_annotated.h5ad | 
+| ltl331_velocity.h5ad | GSE297328_ltl331_velocity.h5ad | 
+| ltl331_harmony_integrated.h5ad | GSE297328_ltl331_harmony_integrated.h5ad |
+
+`sha256sum data/objects/*.h5ad > data/objects/CHECKSUMS.txt`

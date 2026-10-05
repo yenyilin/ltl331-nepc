@@ -108,7 +108,7 @@ plotting. All parameters, seeds and software versions are in `config/params.yaml
    `RUN.md` gives run instructions. Example:
    ```
    python scripts/python/cellrank_bifurcation.py \
-       --h5ad <figshare_velocity.h5ad> --cluster-key clusters \
+       --h5ad data/objects/ltl331_velocity.h5ad --cluster-key clusters \
        --intermediate 17 --ascl1-pos 10 --ascl1-neg 7
    ```
 
@@ -120,7 +120,7 @@ config/params.yaml          all parameters
 docs/                       methods parameter table
 pyproject.toml, uv.lock     pinned environment (`uv sync`)
 env/                        environment notes and legacy pip fallback
-data/README.md              data sources (files hosted on figshare/GEO)
+data/README.md              data sources (files hosted on GEO GSE297328)
 figures/                    graphical abstract
 ```
 

@@ -2,15 +2,15 @@
 # requires-python = ">=3.10"
 # dependencies = ["marimo", "pandas", "numpy", "scipy"]
 # ///
-"""Reviewer 1 #3 (and #2) — the neuroendocrine states validate in independent human cohorts.
+"""The neuroendocrine states validate in independent human cohorts.
 
-Reviewer-facing verification layer over the output of:
+Verification layer over the output of:
     scripts/integration_permanova_knn.py / annotate_validation_phenotypes.py
     -> data/integration_qc/validation_ne_enrichment.tsv  (also Supplementary Table T7)
 
 This notebook RECOMPUTES the headline cross-cohort enrichment odds ratios live from the
 deposited 2x2 counts, using the same Fisher exact test the pipeline uses, so the
-Gao/Li odds ratios are derived in front of the reviewer rather than retyped.
+Gao/Li odds ratios are derived transparently in the notebook rather than retyped.
 
 Run interactively:        marimo edit notebooks/verify_ned_enrichment.py
 Reproducible sandbox:     marimo edit --sandbox notebooks/verify_ned_enrichment.py
@@ -39,12 +39,10 @@ def _intro(mo):
     mo.md(r"""
     # Neuroendocrine states replicate in independent human cohorts
 
-    *Addresses Reviewer 1, Comments 3 and 2.*
+    **Question.** Do the neuroendocrine states identified in the LTL331/R model correspond
+    to neuroendocrine disease in independent patient data?
 
-    > *"Do the neuroendocrine states identified in the LTL331/R model actually
-    > correspond to neuroendocrine disease in independent patient data?"*
-
-    ### Response in one sentence
+    ### Result in one sentence
 
     In both external cohorts, the cells our model assigns to the **neuroendocrine
     (NE)** program concentrate overwhelmingly in the epithelium that the cohort's
@@ -178,8 +176,8 @@ def _provenance(mo):
         --out data/integration_qc/        # -> validation_ne_enrichment.tsv
     ```
 
-    This notebook re-derives the per-cohort Fisher odds ratios from those counts —
-    lands on **main Fig. 6D + Supplementary Table T7 (R1 #3 / #2)**. The odds-ratio
+    This notebook re-derives the per-cohort Fisher odds ratios from those counts;
+    these values underlie **Fig. 6D** and **Additional file 2: Table S7**. The odds-ratio
     confidence intervals in the deposited table (Gao 60–300; Li 24–41) are reported
     in Fig. 6D.
     """)

@@ -2,9 +2,9 @@
 # requires-python = ">=3.10"
 # dependencies = ["marimo", "pandas", "numpy", "scipy", "matplotlib"]
 # ///
-"""Reviewer 1 #5 — cluster 17 is biased toward the ASCL1- NE fate.
+"""Cluster 17 is biased toward the ASCL1- NE fate.
 
-Reviewer-facing verification layer over the output of:
+Verification layer over the output of:
     scripts/cluster17_absorption.py   (CellRank2 GPCCA absorption probabilities)
 
 The heavy step (CellRank GPCCA on the velocity object, needs SLEPc) is NOT
@@ -37,14 +37,11 @@ def _intro(mo):
     mo.md(r"""
     # Cluster 17 fate bias (ASCL1- vs ASCL1+)
 
-    *Addresses Reviewer 1, Comment 5.*
+    **Question.** Is the split of cluster 17 into ASCL1+ and ASCL1- NEPC states supported
+    by a quantitative, statistically tested fate analysis (CellRank absorption
+    probabilities), beyond marker expression?
 
-    > *"The claim that cluster 17 bifurcates into ASCL1+ and ASCL1- NEPC
-    > states is asserted from marker expression. A quantitative,
-    > statistically tested fate analysis (e.g. CellRank absorption
-    > probabilities) is needed to support directional commitment."*
-
-    ### Response in one sentence
+    ### Result in one sentence
 
     On this object's own CellRank terminal macrostates, cluster-17 cells
     carry a **median within-NE ASCL1+ fraction of 0.057** (i.e. ~0.94 toward
@@ -225,7 +222,7 @@ def _provenance(mo):
 
     This notebook re-derives the within-NE ASCL1± split and the Wilcoxon
     p-value from the deposited per-cell matrix using the pipeline's own
-    `grp` helper — lands on **Fig 4F + Supp S14 (R1 #5, R2 #6)**.
+    `grp` helper; these values underlie **Fig. 4F**.
     """)
     return
 

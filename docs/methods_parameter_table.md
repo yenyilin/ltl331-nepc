@@ -121,7 +121,7 @@ Machine-readable source: `config/params.yaml`.
 
 | Parameter | Value |
 |-----------|-------|
-| Cohort | 316 CRPC + 19 NEPC (E-MTAB-9930) |
+| Cohort | 316 CRPC + 19 NEPC (Bolis et al. 2021 compendium) |
 | Batch correction | ComBat (sva 3.50.0), PolyA+ reference batch |
 | GEP scoring | top-30 genes per GEP, hierarchical clustering |
 

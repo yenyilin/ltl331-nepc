@@ -104,7 +104,7 @@ joint_integration_revision:
   seed_leiden: 0
 
 bulk_rnaseq:
-  cohort: "316 CRPC + 19 NEPC (E-MTAB-9930)"
+  cohort: "316 CRPC + 19 NEPC (Bolis et al. 2021 compendium; see DATA_AVAILABILITY.md)"
   batch_correction: "ComBat (sva), PolyA+ reference"
   gep_top_genes: 30
 
@@ -114,7 +114,7 @@ bulk_rnaseq:
 # Snakemake/Nextflow workflow resolves).
 data_objects:
   base:                                   # (1) expression — Fig 2/3, SCENIC, decoupleR
-    file: data/objects/ltl331_base.h5ad
+    file: data/objects/ltl331_annotated.h5ad
     n_cells: 51726
     matrix: { X: scaled_zscore_hvg, lognorm: raw, layers: none }
     score_from: raw                       # .X is scaled — use_raw=True / --use-raw
@@ -129,6 +129,6 @@ data_objects:
   harmony:  # (3) integration/clinical — Fig 6
     file: data/objects/ltl331_harmony_integrated.h5ad
     embedding: X_pca_harmony
-    matrix: { X: TBD_check_min }          # if scaled, patient_level_stats needs --layer
-    obs: { cohort: TBD, patient: TBD, joint_cluster: leiden_0.55,
-           ltl331_label: seurat_clusters }
+    matrix: { X: check_min }              # confirm scaled vs lognorm on the object; if scaled, patient_level_stats needs --layer (see MANIFEST.md)
+    obs: { cohort: dataset, patient: orig.ident, joint_cluster: leiden_0.55,
+           ltl331_label: seurat_clusters }   # patient key: confirm exact .obs name on the deposited object (see MANIFEST.md)

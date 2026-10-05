@@ -2,17 +2,16 @@
 # requires-python = ">=3.10"
 # dependencies = ["marimo", "pandas", "numpy", "matplotlib"]
 # ///
-"""Reviewer 1 #3 — integration QC (iLISI / cLISI), honestly.
+"""Integration QC (iLISI / cLISI).
 
-Reviewer-facing verification layer over the outputs of:
+Verification layer over the outputs of:
     scripts/integration_lisi_kbet.py       (iLISI/cLISI on naive vs Harmony embeddings)
     scripts/integration_permanova_knn.py   (PERMANOVA R2 + dispersion)
 
-Companion to `notebooks/R1_3_integration.py`, which covers the Harmony
-cluster-agreement / origin-map facet of R1 #3. THIS notebook covers the QC
-metrics and the honest reading of them: the three cohorts do **not** kNN-mix
-even after Harmony (iLISI = 1.0), so the R1 #3 deliverable is **label/signature
-transfer, not co-embedding** — and that label transfer is concordant.
+This notebook covers the integration QC metrics and how to read them: the
+three cohorts do **not** kNN-mix even after Harmony (iLISI = 1.0), so cross-cohort
+validation rests on **label/signature transfer, not co-embedding**, and that
+label transfer is concordant.
 
 The full LISI recompute needs the 74k-cell joint object + harmonypy/scanpy and
 is guarded behind a file check; the light tier (deltas, cross-cohort concordance,
@@ -42,25 +41,19 @@ def _intro(mo):
     mo.md(r"""
     # Cross-cohort integration QC (iLISI / cLISI)
 
-    *Addresses Reviewer 1, Comment 3.*
+    **Question.** Do PDX-derived transition cells and clinical cells co-localize in a
+    single latent manifold after direct integration (e.g. Harmony)?
 
-    > *"…a direct integration of datasets (e.g. Harmony or Seurat v5) to
-    > demonstrate that PDX-derived transition cells and clinical 'plastic'
-    > cells co-localize in the same latent manifold."*
-
-    ### Response in one sentence (the honest version)
+    ### Result in one sentence
 
     Harmony applies a **real** correction (≈29 % displacement on shared dims)
     but the human-epithelium PDX and the clinical biopsies **do not kNN-mix**
     (iLISI = 1.000 before *and* after) — a linear PCA correction cannot bridge
-    a platform/model batch this large. We do **not** force it (cranking θ to
-    fake co-embedding is exactly the over-correction R2 #7 watches for).
-    Instead the R1 #3 claim rests on **concordant label transfer**: uniform
+    a platform/model batch this large. We do **not** force it (raising θ to
+    force co-embedding would risk over-correction).
+    Instead, cross-cohort correspondence rests on **concordant label transfer**: uniform
     marker scoring places PRAD-luminal and NE epithelial populations in
     **all three cohorts** on the same AR→NE axis.
-
-    > See `notebooks/R1_3_integration.py` for the cluster-agreement / origin-map
-    > evidence; this notebook is the metric QC behind the decision.
     """)
     return
 
@@ -258,9 +251,8 @@ def _provenance(mo):
     python scripts/integration_permanova_knn.py --adata harmony_10pt.h5ad --out data/integration_qc/
     ```
 
-    Honest interpretation pinned in `data/integration_qc/INTERPRETATION.md`.
-    Lands on **Supp S20 + Table T8 (R1 #3)**; the label-transfer evidence is
-    carried by Fig 6 and `notebooks/R1_3_integration.py`.
+    These metrics underlie **Additional file 1: Fig. S21** and **Additional file 2:
+    Table S8**; the label-transfer evidence is shown in Fig. 6.
     """)
     return
 

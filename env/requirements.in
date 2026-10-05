@@ -24,8 +24,10 @@ decoupler                  # signature scoring (Step 4 acceleration)
 scib                       # iLISI/cLISI/kBET (Step 5 acceleration)
 
 # --- optimal-transport / temporal kernel ---
-# RealTimeKernel via moscot; uses JAX (CPU-only on Intel Mac)
-moscot[scrnaseq]
+# moscot[scrnaseq] (RealTimeKernel, pulls JAX) intentionally excluded: never run
+# for this analysis — CellRank used only the Connectivity/Pseudotime/Velocity
+# kernels. Uncomment to enable the moscot RealTimeKernel.
+# moscot[scrnaseq]
 
 # --- regulons / SCENIC ---
 # Heavy; usually only on the server. Uncomment when locking the server env.
@@ -36,4 +38,4 @@ moscot[scrnaseq]
 
 # --- config + notebooks ---
 pyyaml                     # config/params.yaml reader (R + Python share this)
-marimo                     # reviewer-facing notebooks (notebooks/*.py)
+marimo                     # verification notebooks (notebooks/*.py)

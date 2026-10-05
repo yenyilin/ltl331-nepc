@@ -13,19 +13,20 @@ data/
 │   ├── ltl331_velocity.h5ad            # (2) velocity layers + CellRank2 fate obs
 │   ├── ltl331_harmony_integrated.h5ad  # (3) LTL331+Gao+Li joint Harmony
 │   ├── MANIFEST.md                # per-object schema contract (committed)
-│   └── CHECKSUMS.txt              # sha256 of each object (committed)
+│   └── CHECKSUMS.txt              # sha256 of each object (generate from the GEO objects, then commit)
 ├── tables/           # small committed inputs (regenerate or version-control)
 │   ├── genesets/     # e.g. hallmark_v7.5.1.tsv (from MSigDB GMT; see config)
 │   ├── cnv/          # nexus_*, infercnv_*, WES CNV calls (TSV) — see docs/nexus_cnv_figure.md
 │   └── scenic/       # regulon / RSS tables (TSV)
 ├── doubletfinder/    # Fig S1 before/after count matrices — see doubletfinder/README.md
 ├── raw/              # GEO GSE297328 (CellRanger outputs) if re-running from scratch
-└── external/         # Gao (GSE137829), Li (HRA002145), bulk (E-MTAB-9930),
+└── external/         # Gao (GSE137829), Li (HRA002145), bulk (Bolis et al. 2021 compendium; see DATA_AVAILABILITY.md),
                       # inferCNV normal reference, SCENIC motif databases
 ```
 
-`objects/` holds large gitignored `.h5ad`; only its `MANIFEST.md` + `CHECKSUMS.txt`
-are committed. `tables/` holds small derived inputs that *can* live in the repo (so
+`objects/` holds large gitignored `.h5ad`; only its `MANIFEST.md` is committed
+(add `CHECKSUMS.txt`, generated from the deposited GEO objects, to let a fetch be
+verified). `tables/` holds small derived inputs that *can* live in the repo (so
 a figure can be remade without the GB-scale objects) — commit them or document how
 to regenerate.
 
@@ -45,9 +46,14 @@ Each analysis family binds to one object; they have **different internal schemas
 ## Fetch (examples)
 
 ```
-# figshare processed objects (replace with real DOIs)
-# wget -O data/objects/ltl331_annotated.h5ad "<figshare download URL>"
-# sha256sum -c data/objects/CHECKSUMS.txt        # verify integrity
+# processed objects from GEO GSE297328 (public):
+# wget -O data/objects/ltl331_annotated.h5ad \
+#   https://ftp.ncbi.nlm.nih.gov/geo/series/GSE297nnn/GSE297328/suppl/GSE297328_ltl331_annotated.h5ad
+# wget -O data/objects/ltl331_velocity.h5ad \
+#   https://ftp.ncbi.nlm.nih.gov/geo/series/GSE297nnn/GSE297328/suppl/GSE297328_ltl331_velocity.h5ad
+# wget -O data/objects/ltl331_harmony_integrated.h5ad \
+#   https://ftp.ncbi.nlm.nih.gov/geo/series/GSE297nnn/GSE297328/suppl/GSE297328_ltl331_harmony_integrated.h5ad
+# sha256sum -c data/objects/CHECKSUMS.txt        # verify integrity (once CHECKSUMS.txt is generated — see below)
 
 # scripts read paths via --h5ad / CLI args or config; do not hardcode.
 ```

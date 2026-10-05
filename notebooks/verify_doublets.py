@@ -2,15 +2,15 @@
 # requires-python = ">=3.10"
 # dependencies = ["marimo", "pandas", "numpy", "scipy", "matplotlib"]
 # ///
-"""Reviewer 1 #1 — cluster 17 is not a doublet artefact.
+"""Cluster 17 is not a doublet artefact.
 
-Reviewer-facing verification layer over the outputs of:
+Verification layer over the outputs of:
     scripts/doublet_unify.py        (DoubletFinder original vs valid -> unified tables)
     scripts/doublet_robustness.py   (per-cluster Fisher enrichment + composition stats)
 
 This notebook RECOMPUTES the headline numbers live from the deposited unified
 tables, importing the *same* helper (`bh`) the pipeline uses — so the cluster-17
-odds ratio and enrichment call are derived in front of the reviewer, not retyped.
+odds ratio and enrichment call are derived transparently in the notebook, not retyped.
 
 Run interactively:        marimo edit notebooks/verify_doublets.py
 Reproducible sandbox:     marimo edit --sandbox notebooks/verify_doublets.py
@@ -39,13 +39,10 @@ def _intro(mo):
     mo.md(r"""
     # Cluster 17 is not a doublet artefact
 
-    *Addresses Reviewer 1, Comment 1.*
+    **Question.** Could the rare intermediate population (cluster 17) be a technical
+    doublet artefact rather than a genuine transcriptional state?
 
-    > *"The authors should rule out that the rare intermediate population
-    > (cluster 17) is a technical doublet artefact rather than a genuine
-    > transcriptional state."*
-
-    ### Response in one sentence
+    ### Result in one sentence
 
     DoubletFinder flags cluster 17 as **depleted** of doublets (rate 1.56 %
     vs 4.17 % overall; Fisher OR = **0.36**, not significant), and removing
@@ -265,7 +262,8 @@ def _provenance(mo):
 
     This notebook re-derives the cluster-17 OR, enrichment call, composition
     and temporal-preservation statistics from those tables using the
-    pipeline's own `bh` helper — lands on **Supp S6 + Table T5 (R1 #1)**.
+    pipeline's own `bh` helper; these values underlie **Additional file 1:
+    Fig. S1** and **Additional file 2: Table S5**.
     """)
     return
 

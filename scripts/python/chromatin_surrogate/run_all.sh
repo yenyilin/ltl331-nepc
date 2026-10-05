@@ -1,7 +1,7 @@
 #!/bin/bash
 # run_all.sh — one-command, fully-provenanced entry point for the chromatin-surrogate
 # analysis (Supplementary Fig. S15B). This IS the workflow: linear, modular, idempotent,
-# and it records everything a reviewer needs to reproduce the run — code commit, tool
+# and it records everything needed to reproduce the run — code commit, tool
 # versions, input checksums, parameters, seed, environment lock. No workflow engine
 # required; the provenance it writes is the reproducibility artifact.
 #

@@ -34,5 +34,6 @@
 - This repository: `https://github.com/yenyilin/ltl331-nepc` — see `FIGURES.md`
   for the script behind each panel and `docs/methods_parameter_table.md` for
   all parameters.
-
+- Archived on Zenodo: https://doi.org/10.5281/zenodo.23159059 (concept DOI,
+  always resolves to the latest version; v1.0.0 = 10.5281/zenodo.23159060).
 ---

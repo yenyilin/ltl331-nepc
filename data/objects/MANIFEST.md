@@ -53,7 +53,7 @@ velocity, pseudotime, fate/absorption (Fig 4), trajectory schematic, pt-QC.
 
 ---
 
-## (3) `harmony.annotated.h5ad` — joint Harmony integration
+## (3) `ltl331_harmony_integrated.h5ad` — joint Harmony integration
 
 LTL331 + Gao + Li, jointly embedded (Leiden 0.55). Drives integration QC,
 cross-cohort correspondence, clinical co-mapping (Fig 6), patient-level stats.
@@ -72,16 +72,3 @@ cross-cohort correspondence, clinical co-mapping (Fig 6), patient-level stats.
 > if negative, supply `--layer <lognorm-layer>`.
 
 ---
-
-## Integrity
-
-Record checksums + provenance when depositing (so a fetched object is verifiably
-the one the figures were made from):
-
-| object | figshare DOI | sha256 | built by | date |
-|--------|--------------|--------|----------|------|
-| ltl331_base.h5ad | `<TBD>` | `<TBD>` | `<pipeline/commit>` | `<TBD>` |
-| ltl331_velocity_cr2.h5ad | `<TBD>` | `<TBD>` | `<commit>` | `<TBD>` |
-| ltl331_harmony.h5ad | `<TBD>` | `<TBD>` | `<commit>` | `<TBD>` |
-
-`sha256sum data/objects/*.h5ad > data/objects/CHECKSUMS.txt`

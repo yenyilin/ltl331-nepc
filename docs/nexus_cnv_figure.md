@@ -1,6 +1,6 @@
 # Nexus CNV figure (`plot_nexus_cnv_curves.py`)
 
-Curve-style copy-number visualisation of the LTL331/R Nexus WGS cohort — the
+Curve-style copy-number visualisation of the LTL331/R Nexus WES cohort — the
 cohort gain/loss frequency plot plus per-sample CNV profiles, with driver-gene
 annotations and an LOH / allelic-imbalance track. Build **GRCh38 / hg38**.
 
@@ -18,12 +18,12 @@ normalization-reference suffix (`vs …`) is not stored.
 | `data/driver_genes_hg38.tsv` | loci to annotate — `gene`, `chrom`, `start`, `end` |
 
 These TSVs are regenerated from the raw Nexus export by
-`scripts/nexus_cnv_loader.py`, which writes public-safe sample names by default.
+`scripts/python/nexus_cnv_loader.py`, which writes public-safe sample names by default.
 
 ## Usage
 
 ```bash
-python3 scripts/plot_nexus_cnv_curves.py \
+python3 scripts/python/plot_nexus_cnv_curves.py \
   --calls-tsv       data/nexus_calls.tsv \
   --descriptors-tsv data/nexus_descriptors.tsv \
   --bin-size        1000000 \

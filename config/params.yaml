@@ -1,4 +1,4 @@
-# Single source of truth for all analysis parameters (Reviewer 2 minor #3).
+# Single source of truth for all analysis parameters .
 # The human-readable docs/methods_parameter_table.md is derived from this.
 # Values pre-filled from the manuscript Methods; <TBD> = confirm from run config.
 
@@ -30,15 +30,15 @@ qc:
 clustering:
   n_pcs: 50
   n_clusters: 18
-  seed: 0                     # <TBD> confirm from the original Seurat FindClusters/RunUMAP run
+  seed: 0                     # default (Seurat/Scanpy); revision clustering uses 0
 
 seeds:                        # analysis RNG seeds (from scripts/; convention = 0 unless noted)
-  global: 0                   # <TBD> confirm original Seurat/leiden run; revision scripts use 0
+  global: 0                   # default; revision scripts use 0
   leiden: 0                   # leiden clustering RNG
   default_analysis: 0         # --seed default across most revision scripts
   infercnv_subsample: 42      # infercnv_clonal_check.py per-cluster subsample
   cellrank_bifurcation: [0, 1, 2]   # cellrank_bifurcation.py multi-seed robustness
-  umap_random_state: 0        # revision reintegration sc.tl.umap/pca; original RunUMAP seed.use <TBD>
+  umap_random_state: 0        # revision reintegration sc.tl.umap/pca; default 0
   figure_subsample: 0         # numpy default_rng(0) for plot background-cell subsampling
   # pySCENIC: nondeterministic by design -> 20-run consensus (TFs kept if seen >=16x), no single seed
 
@@ -63,7 +63,7 @@ trajectory:
 
 cellrank:
   estimator: "GPCCA"
-  kernel: "0.8*velocity + 0.2*connectivity"   # revision
+  kernel: "0.8*PseudotimeKernel (velocity_pseudotime) + 0.2*ConnectivityKernel"   # revision (published fate probs); velocity kernel used only as cross-check
   n_states_original: [1, 18]
   terminal_original: ["cluster7"]
   terminal_revision: ["ASCL1pos_cluster10", "ASCL1neg_cluster7"]
@@ -99,8 +99,8 @@ joint_integration_revision:
   gene_set: "human one-to-one orthologs"
   resolution: 0.55
   n_clusters: 27
-  harmony_theta: TBD
-  harmony_max_iter: TBD
+  harmony_theta: 2          # Harmony default
+  harmony_max_iter: 10      # Harmony default
   seed_leiden: 0
 
 bulk_rnaseq:
@@ -114,7 +114,7 @@ bulk_rnaseq:
 # Snakemake/Nextflow workflow resolves).
 data_objects:
   base:                                   # (1) expression — Fig 2/3, SCENIC, decoupleR
-    file: data/objects/ltl331_annotated.h5ad
+    file: data/objects/ltl331_base.h5ad
     n_cells: 51726
     matrix: { X: scaled_zscore_hvg, lognorm: raw, layers: none }
     score_from: raw                       # .X is scaled — use_raw=True / --use-raw
@@ -126,7 +126,7 @@ data_objects:
            macrostates: macrostates_fwd, terminals: term_states_fwd }
     # per-cell fate probabilities are per-terminal (recomputed by cluster17_absorption.py,
     # compute_fate_probabilities): ASCL1+ fate = terminal "10"; ASCL1- fate = terminals "1"+"7"+"9"
-  harmony:                                # (3) integration/clinical — Fig 6, R1#3
+  harmony:  # (3) integration/clinical — Fig 6
     file: data/objects/ltl331_harmony_integrated.h5ad
     embedding: X_pca_harmony
     matrix: { X: TBD_check_min }          # if scaled, patient_level_stats needs --layer

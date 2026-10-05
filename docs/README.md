@@ -5,7 +5,7 @@ Supplementary technical documentation that's too detailed for the root
 live here:
 
 1. **A human-readable derivation of a machine-readable source** — read the
-   source for automation, read the doc for a reviewer/human.
+   source for automation, read the doc for a human reader.
 2. **A worked walkthrough of one script's inputs/usage** — for scripts whose
    CLI has enough moving parts (multiple TSV inputs, a build/genome flag,
    sample-order control) that `--help` alone isn't enough context.

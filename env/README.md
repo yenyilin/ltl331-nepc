@@ -1,6 +1,6 @@
 # Environment
 
-## Recommended: `uv sync` (portable, linux + macOS)
+## Recommended: `uv sync` (portable, Linux + macOS)
 
 The repo ships a `pyproject.toml` + `uv.lock` at its root. From the repo root:
 
@@ -9,13 +9,15 @@ uv sync
 source .venv/bin/activate
 ```
 
-This resolves a consistent, cross-platform environment (Python 3.11, linux + macOS
+This resolves a consistent, cross-platform environment (Python 3.11, Linux + macOS
 including Apple Silicon) and is the path we test. It is a faithful **re-derivation**
 from PyPI of the analysis stack, not a byte-for-byte mirror of the original conda
 environment: a few transitive versions differ where a conda pin is PyPI-inconsistent
 (e.g. `pygam`), and `moscot`/JAX are omitted because the optional CellRank
-RealTimeKernel was never used for this analysis. All figure and analysis scripts run
-under this environment.
+RealTimeKernel was never run for this analysis — the reported results use only
+the Connectivity/Pseudotime/Velocity kernels. (The legacy `requirements.in` pip
+env below excludes `moscot[scrnaseq]` for the same reason.) All figure and
+analysis scripts run under this environment.
 
 The `env/requirements*.txt` files below are a legacy pip fallback derived from the
 conda freeze; prefer `uv sync`.
@@ -25,7 +27,7 @@ conda freeze; prefer `uv sync`.
 # Environment capture (provenance)
 
 **Capture exact versions from the machine that produced the results** — do not
-hand-transcribe (Reviewer 2 minor #3 asks for versions).
+hand-transcribe.
 
 ## File layout
 
@@ -71,11 +73,12 @@ python -c "import sys, scanpy; print(sys.version); scanpy.logging.print_versions
 
 ## Notes on the two Python envs
 
-- **Canonical** (`requirements.in`): full set including moscot[scrnaseq] (uses
-  JAX), celltypist, decoupler, scib. This is what the server runs and the
-  paper's results are produced from. Pertpy / scvi-tools are intentionally
-  excluded — Stack C (CPU-friendly) was chosen during the revision; see
-  `review/patient_level_stats_plan.md`.
+- **Canonical** (`requirements.in`): full set including celltypist, decoupler,
+  scib. This is what the server runs and the paper's results are produced from.
+  `moscot[scrnaseq]` (which pulls JAX) is commented out: it was never run for
+  this analysis, matching the recommended `uv sync` env (`pyproject.toml`).
+  Pertpy / scvi-tools are also intentionally excluded; they were not required
+  for the reported analyses.
 - **Local-Intel-Mac** (`requirements-local.in`): slimmer; commented-out
   moscot/celltypist/decoupler/scib so they can be added when needed.
   PyTorch-pulling deps (pertpy, scvi-tools) are deliberately omitted because

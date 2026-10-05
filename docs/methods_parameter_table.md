@@ -18,6 +18,7 @@ Machine-readable source: `config/params.yaml`.
 | UCell | 2.6.2 | signature scoring |
 | inferCNV | 1.15.0 | CNV |
 | msigdbr / fgsea | 7.5.1 / 1.30.0 | GSEA |
+| velocyto | 0.17.17 | spliced/unspliced counts |
 | scVelo | 0.3.4 | RNA velocity |
 | CellRank | 2.0.7 | fate probabilities |
 | pySCENIC | 0.12.0 | regulons |
@@ -35,7 +36,7 @@ Machine-readable source: `config/params.yaml`.
 | UMI / gene counts | within 3 MAD of median |
 | Minimum UMIs per cell | ≥ 1,000 |
 | Min cells per gene | > 10 |
-| Doublet removal retention | > 95% (Supp Table 9) |
+| Doublet removal retention | > 95% (Supp Table 5) |
 
 ## Clustering / dimensionality reduction
 
@@ -44,8 +45,8 @@ Machine-readable source: `config/params.yaml`.
 | PCs retained | 50 (knee point) |
 | Clusters (LTL331) | 18 |
 | Normalization | log-normalization (Seurat defaults) |
-| HVGs | Seurat defaults / `<TBD>` |
-| Random seed | `<TBD — record actual>` |
+| HVGs | 2,000 (Seurat default) |
+| Random seed | default (Seurat/Scanpy); clustering (Leiden) seed = 0 |
 
 ## inferCNV
 
@@ -69,10 +70,10 @@ Machine-readable source: `config/params.yaml`.
 | scVelo mode | dynamical |
 | velocity pseudotime | `tl.velocity_pseudotime` |
 | CellRank estimator | GPCCA |
-| CellRank kernel (revision) | 0.8·VelocityKernel + 0.2·ConnectivityKernel |
-| CellRank macrostates (revision) | 8 terminal states recovered `{0,1,4_1,4_2,6,7,9,10}`; 4 NE fates (clusters 1, 7, 9, 10) |
+| CellRank kernel | 0.8·PseudotimeKernel (velocity_pseudotime) + 0.2·ConnectivityKernel |
+| CellRank macrostates | 8 terminal states recovered `{0,1,4_1,4_2,6,7,9,10}`; 4 NE fates (clusters 1, 7, 9, 10) |
 | Terminal states (original) | cluster 7 (sole NE terminal) |
-| Terminal states (R1#5 revision) | ASCL1+ (cluster 10) & ASCL1− (cluster 7) |
+| Terminal states (revision) | ASCL1+ (cluster 10) & ASCL1− (cluster 7) |
 | TF annotation source | cisTarget TF list (fetched Aug 2022) |
 
 ## SCENIC
@@ -113,7 +114,7 @@ Machine-readable source: `config/params.yaml`.
 |-----------|-------|
 | Method | Harmony (primary) |
 | Clustering resolution | Leiden 0.55 → 27 clusters |
-| Harmony theta / max_iter | `<TBD — record>` |
+| Harmony theta / max_iter | default (theta = 2, max_iter = 10) |
 | Random seed (leiden) | 0 |
 
 ## Bulk RNA-seq
